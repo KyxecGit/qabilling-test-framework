@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <!-- 📝 Минимальная конфигурация логирования для QABilling тестов
+       
+       Где видны логи:
+       - Консоль = вывод во время запуска: mvn clean verify
+       - Файл = logs/test.log = подробная информация для анализа
+  -->
+
+  <!-- 🖥️ Логирование в консоль (минимальный вывод) -->
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss} [%-5level] %msg%n</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+
+  <!-- 📁 Логирование в файл (все детали) -->
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>logs/test.log</file>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%-5level] %logger{36} - %msg%n</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+
+  <!-- 🎯 Корневые настройки: INFO уровень + консоль + файл -->
+  <root level="INFO">
+    <appender-ref ref="CONSOLE"/>
+    <appender-ref ref="FILE"/>
+  </root>
+
+  <!-- 🔍 Для своих тестов (qabilling.*)  - можно больше деталей -->
+  <logger name="qabilling" level="DEBUG"/>
+</configuration>
